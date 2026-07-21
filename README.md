@@ -1,4 +1,4 @@
-# BRAS DE FER INSOUMIE — Le Duel Ultime
+# BRAS DE FER INSOUMIS — Le Duel Ultime
 
 Un jeu de bras de fer en duel où la vitesse de clic décide du vainqueur. Affrontez l'ordinateur ou un ami dans des combats endiablés !
 

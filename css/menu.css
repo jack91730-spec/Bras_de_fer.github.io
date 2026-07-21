@@ -1,0 +1,402 @@
+﻿/* ============================================================
+   BRAS DE FER — Menu Styles — Style Manga / Animé
+   ============================================================ */
+
+/* ===== BACK BUTTON ===== */
+.btn-back {
+  position: absolute;
+  top: var(--sp-md); left: var(--sp-md);
+  z-index: 100;
+  padding: 8px 18px;
+  background: var(--bg-mid);
+  border: 3px solid #000;
+  border-radius: var(--r-sm);
+  box-shadow: 3px 3px 0 #000;
+  color: var(--text-sec);
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+.btn-back:hover {
+  background: var(--glass-hover);
+  color: var(--text);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #000;
+}
+
+/* ===== SCREEN TITLE ===== */
+.screen-title {
+  font-family: var(--ff-display);
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  letter-spacing: 0.12em;
+  text-align: center;
+  color: var(--text);
+  text-shadow: 3px 3px 0 #000;
+  -webkit-text-stroke: 1px rgba(0,0,0,0.5);
+}
+
+/* ============================================================
+   SCREEN 1 — MAIN MENU
+   ============================================================ */
+.menu-container {
+  position: relative; z-index: 10;
+  display: flex; flex-direction: column;
+  align-items: center;
+  gap: var(--sp-lg);
+  width: 100%;
+  padding: var(--sp-md);
+  animation: slide-up 0.6s ease both;
+}
+
+/* Logo */
+.logo-wrapper { text-align: center; }
+
+.logo-svg {
+  width: 220px; height: 110px;
+  filter: drop-shadow(4px 4px 0 #000) drop-shadow(0 0 20px rgba(230,0,0,0.6));
+  animation: logo-pulse 3s ease-in-out infinite;
+}
+@keyframes logo-pulse {
+  0%,100% { filter: drop-shadow(4px 4px 0 #000) drop-shadow(0 0 18px rgba(230,0,0,0.5)); }
+  50%     { filter: drop-shadow(4px 4px 0 #000) drop-shadow(0 0 40px rgba(230,0,0,0.9)) drop-shadow(0 0 70px rgba(255,100,0,0.4)); }
+}
+
+.logo-title {
+  font-family: var(--ff-display);
+  font-size: clamp(4.5rem, 12vw, 9rem);
+  letter-spacing: 0.10em;
+  color: var(--gold);
+  line-height: 1;
+  margin-top: -8px;
+  text-shadow: 5px 5px 0 #000, 8px 8px 0 rgba(0,0,0,0.4);
+  -webkit-text-stroke: 2px #000;
+}
+
+.logo-subtitle {
+  font-family: var(--ff-body);
+  font-size: 0.9rem; font-weight: 700;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+/* Menu buttons */
+.menu-buttons {
+  display: flex; flex-direction: column;
+  gap: var(--sp-sm);
+  width: 100%; max-width: 400px;
+}
+.btn-menu { width: 100%; padding: 16px 32px; font-size: 1.3rem; letter-spacing: 0.12em; }
+
+/* Speed lines decoratives sur le menu */
+.menu-container::before {
+  content: '';
+  position: fixed;
+  top: 50%; left: 50%;
+  width: 200vw; height: 200vh;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 11deg,
+    rgba(255,255,255,0.012) 11deg,
+    rgba(255,255,255,0.012) 12deg,
+    transparent 12deg,
+    transparent 23deg,
+    rgba(255,255,255,0.012) 23deg,
+    rgba(255,255,255,0.012) 24deg,
+    transparent 24deg
+  );
+  pointer-events: none;
+  z-index: -1;
+  animation: spin 60s linear infinite;
+}
+
+@media (max-width: 480px) {
+  .logo-title  { font-size: clamp(3rem, 16vw, 5rem); }
+  .logo-svg    { width: 160px; height: 80px; }
+  .btn-menu    { padding: 14px 24px; font-size: 1.1rem; }
+  .menu-buttons { max-width: 320px; }
+}
+
+/* ============================================================
+   SCREEN 2/3 — CARROUSEL DE SÉLECTION
+   ============================================================ */
+.character-container {
+  position: relative; z-index: 10;
+  width: 100%; max-width: 700px;
+  padding: var(--sp-md);
+  animation: fade-in-up 0.5s ease both;
+  display: flex; flex-direction: column;
+  align-items: center; gap: var(--sp-md);
+}
+
+/* Wrapper flèches + stage */
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  width: 100%;
+  justify-content: center;
+}
+
+/* Flèches — Style manga triangle */
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  border-radius: var(--r-sm);
+  border: 3px solid #000;
+  background: var(--bg-mid);
+  color: var(--text);
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #000;
+  transition: all var(--t-fast);
+  display: flex; align-items: center; justify-content: center;
+  user-select: none;
+  font-family: var(--ff-display);
+}
+.carousel-arrow:hover {
+  background: var(--glass-hover);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #000;
+}
+.carousel-arrow:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 #000;
+}
+
+/* Stage */
+.carousel-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-sm);
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ===== CARTES — Style Case Manga ===== */
+.carousel-card {
+  display: flex; flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: var(--sp-md) var(--sp-sm);
+  border-radius: var(--r-md);
+  border: 3px solid #000;
+  background: var(--bg-card);
+  box-shadow: 4px 4px 0 #000;
+  transition: transform 0.32s cubic-bezier(0.34,1.56,0.64,1),
+              opacity 0.32s ease,
+              box-shadow 0.22s ease;
+  cursor: pointer;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+}
+/* Coin supérieur décoratif */
+.carousel-card::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 24px 24px 0;
+  border-color: transparent #000 transparent transparent;
+}
+
+/* Carte centrale */
+.carousel-card.center-card {
+  flex: 0 0 220px;
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  box-shadow: 6px 6px 0 #000, 0 0 0 2px var(--gold);
+  border-color: var(--gold);
+  z-index: 2;
+}
+.carousel-card.center-card:hover {
+  transform: scale(1.03) translateY(-4px);
+  box-shadow: 8px 8px 0 #000;
+}
+
+/* Cartes latérales */
+.carousel-card.side-left,
+.carousel-card.side-right {
+  flex: 0 0 140px;
+  transform: scale(0.82);
+  opacity: 0.45;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #000;
+}
+.carousel-card.side-left:hover,
+.carousel-card.side-right:hover {
+  opacity: 0.65;
+  transform: scale(0.87);
+}
+
+/* ===== CONTENU DES CARTES ===== */
+.carousel-avatar-wrap {
+  width: 100px; height: 100px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  border: 3px solid currentColor;
+  box-shadow: 3px 3px 0 #000;
+  flex-shrink: 0;
+}
+.side-left .carousel-avatar-wrap,
+.side-right .carousel-avatar-wrap {
+  width: 70px; height: 70px;
+}
+.carousel-avatar {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.carousel-char-name {
+  font-family: var(--ff-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-shadow: 2px 2px 0 #000;
+  -webkit-text-stroke: 0.5px #000;
+}
+.side-left .carousel-char-name,
+.side-right .carousel-char-name { font-size: 0.95rem; text-shadow: 1px 1px 0 #000; }
+
+.carousel-stats {
+  width: 100%;
+  display: flex; flex-direction: column; gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.side-left .carousel-stats,
+.side-right .carousel-stats { display: none; }
+
+.carousel-stat-row {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.carousel-stat-dots { display: flex; gap: 3px; }
+.carousel-stat-dot {
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  border: 2px solid #000;
+  background: #333;
+}
+.carousel-stat-dot.fill {
+  background: var(--gold);
+  box-shadow: 1px 1px 0 #000;
+}
+
+.carousel-char-desc {
+  font-size: 0.72rem; color: #999;
+  text-align: center; line-height: 1.5;
+  padding: 0 4px;
+}
+.side-left .carousel-char-desc,
+.side-right .carousel-char-desc { display: none; }
+
+/* Indicateurs (dots) */
+.carousel-dots {
+  display: flex; gap: 8px;
+  justify-content: center;
+}
+.carousel-dot {
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  border: 2px solid #000;
+  background: #333;
+  transition: all var(--t-fast);
+  cursor: pointer;
+}
+.carousel-dot.active {
+  background: var(--gold);
+  transform: scale(1.35);
+  box-shadow: 1px 1px 0 #000;
+}
+
+/* Tag difficulté / niveau */
+.opponent-tag {
+  font-family: var(--ff-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 3px 10px;
+  border: 2px solid currentColor;
+  border-radius: var(--r-sm);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* Animation flip */
+@keyframes carousel-in-left {
+  from { transform: scale(0.7) translateX(60px); opacity: 0; }
+  to   { transform: scale(1) translateX(0);      opacity: 1; }
+}
+@keyframes carousel-in-right {
+  from { transform: scale(0.7) translateX(-60px); opacity: 0; }
+  to   { transform: scale(1)  translateX(0);      opacity: 1; }
+}
+.anim-from-left  { animation: carousel-in-left  0.32s cubic-bezier(0.34,1.56,0.64,1) both; }
+.anim-from-right { animation: carousel-in-right 0.32s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+@media (max-width: 520px) {
+  .carousel-card.side-left, .carousel-card.side-right { flex: 0 0 80px; }
+  .carousel-card.center-card { flex: 0 0 180px; }
+  .carousel-arrow { width: 40px; height: 40px; font-size: 1.6rem; }
+}
+
+.vs-badge {
+  font-family: var(--ff-display);
+  font-size: 2rem; font-style: italic;
+  color: var(--gold);
+  text-shadow: 3px 3px 0 #000;
+  margin: 0 var(--sp-md);
+}
+
+/* ============================================================
+   SCREEN 4 — SCORES
+   ============================================================ */
+.scores-container {
+  position: relative; z-index: 10;
+  width: 100%; max-width: 580px;
+  padding: var(--sp-md);
+  animation: slide-up 0.55s ease both;
+}
+
+.scores-list { display: flex; flex-direction: column; gap: var(--sp-xs); margin: var(--sp-md) 0; }
+
+.score-item {
+  display: flex; align-items: center;
+  gap: var(--sp-sm); padding: var(--sp-sm) var(--sp-md);
+  border-radius: var(--r-sm);
+  background: var(--bg-mid);
+  border: 2px solid #000;
+  box-shadow: 3px 3px 0 #000;
+  transition: background var(--t-fast);
+}
+.score-item:hover { background: var(--glass-hover); }
+
+.score-rank {
+  font-family: var(--ff-display); font-size: 1.5rem;
+  width: 36px; text-align: center; flex-shrink: 0;
+  text-shadow: 2px 2px 0 #000;
+}
+.score-info { flex: 1; overflow: hidden; }
+.score-name  { font-weight: 700; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.score-detail { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+.score-result { font-family: var(--ff-display); font-size: 1.4rem; flex-shrink: 0; text-shadow: 2px 2px 0 #000; }
+
+.empty-scores {
+  text-align: center; color: var(--text-muted);
+  padding: var(--sp-xl) 0; font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* ===== Éléments communs héritant du style manga ===== */
+.difficulty-stars { display: flex; gap: 3px; }
+.star { font-size: 0.85rem; opacity: 0.20; }
+.star.lit { opacity: 1; }

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRAS DE FER INSOUMIE — Le Duel Ultime</title>
+  <meta name="description" content="Jeu de Bras de Fer Insoumie en duel — Joueur vs IA ou Joueur vs Joueur. Qui clique le plus vite gagne !">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     SCREEN 1 — MENU PRINCIPAL
+══════════════════════════════════════════════════ -->
+<div id="screen-main" class="screen active">
+  <div class="particles" id="particles-main"></div>
+
+  <div class="menu-container">
+    <!-- Logo -->
+    <div class="logo-wrapper">
+      <svg class="logo-svg" viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lgL" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#cc1122"/>
+            <stop offset="100%" stop-color="#ff6633"/>
+          </linearGradient>
+          <linearGradient id="lgR" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1166dd"/>
+            <stop offset="100%" stop-color="#00aaff"/>
+          </linearGradient>
+        </defs>
+        <!-- Table -->
+        <rect x="10" y="78" width="200" height="14" rx="7" fill="#3a1a08"/>
+        <!-- Left arm -->
+        <g transform="rotate(-22, 30, 78)">
+          <rect x="10" y="55" width="80" height="22" rx="11" fill="url(#lgL)"/>
+          <ellipse cx="90" cy="66" rx="18" ry="16" fill="url(#lgL)"/>
+        </g>
+        <!-- Right arm -->
+        <g transform="rotate(22, 190, 78)">
+          <rect x="130" y="55" width="80" height="22" rx="11" fill="url(#lgR)"/>
+          <ellipse cx="130" cy="66" rx="18" ry="16" fill="url(#lgR)"/>
+        </g>
+        <!-- Clash -->
+        <circle cx="110" cy="64" r="10" fill="white" opacity="0.92"/>
+        <line x1="110" y1="36" x2="110" y2="54" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="93"  y1="42" x2="101" y2="54" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <line x1="127" y1="42" x2="119" y2="54" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <line x1="80"  y1="62" x2="96"  y2="62" stroke="white" stroke-width="2"   stroke-linecap="round" opacity="0.5"/>
+        <line x1="124" y1="62" x2="140" y2="62" stroke="white" stroke-width="2"   stroke-linecap="round" opacity="0.5"/>
+      </svg>
+
+      <h1 class="logo-title">BRAS DE FER<br><span style="font-size:0.62em;letter-spacing:0.18em;color:var(--gold);">INSOUMIE</span></h1>
+      <p class="logo-subtitle">Le Duel Ultime des Clics</p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="menu-buttons">
+      <button class="btn btn-primary btn-menu" id="btn-pve">⚔️ Joueur vs Ordinateur</button>
+      <button class="btn btn-secondary btn-menu" id="btn-pvp">🤝 Joueur vs Joueur</button>
+      <button class="btn btn-ghost btn-menu" id="btn-scores">🏆 Meilleurs Scores</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SCREEN 2 — SÉLECTION DE L'ADVERSAIRE
+══════════════════════════════════════════════════ -->
+<div id="screen-opponents" class="screen">
+  <div class="particles" id="particles-opp"></div>
+  <button class="btn-back" id="back-opp">&#8592; Retour</button>
+
+  <div class="character-container">
+    <h2 class="screen-title" style="color:var(--p1);">&#9876;&#65039; CHOISIS TON ADVERSAIRE</h2>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow arrow-left" id="opp-prev">&#8249;</button>
+      <div class="carousel-stage">
+        <div class="carousel-card side-left" id="opp-card-left"></div>
+        <div class="carousel-card center-card" id="opp-card-center"></div>
+        <div class="carousel-card side-right" id="opp-card-right"></div>
+      </div>
+      <button class="carousel-arrow arrow-right" id="opp-next">&#8250;</button>
+    </div>
+
+    <div class="carousel-dots" id="opp-dots"></div>
+
+    <div style="text-align:center; margin-top:var(--sp-md);">
+      <button class="btn btn-primary btn-menu" id="btn-fight"
+              style="max-width:280px; margin:0 auto; font-size:1.1rem; padding:16px 40px;">
+        &#9876;&#65039; COMBATTRE !
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SCREEN 3 — SÉLECTION DU PERSONNAGE
+══════════════════════════════════════════════════ -->
+<div id="screen-character" class="screen">
+  <div class="particles" id="particles-char"></div>
+  <button class="btn-back" id="back-char">← Retour</button>
+
+  <div class="character-container">
+    <h2 class="screen-title glow-gold" id="char-screen-title">CHOISIS TON COMBATTANT</h2>
+
+    <div class="carousel-wrapper">
+      <!-- Flèche gauche -->
+      <button class="carousel-arrow arrow-left" id="carousel-prev">&#8249;</button>
+
+      <!-- Carte centrale -->
+      <div class="carousel-stage">
+        <!-- Carte gauche (preview) -->
+        <div class="carousel-card side-left" id="card-left"></div>
+        <!-- Carte centrale active -->
+        <div class="carousel-card center-card" id="card-center"></div>
+        <!-- Carte droite (preview) -->
+        <div class="carousel-card side-right" id="card-right"></div>
+      </div>
+
+      <!-- Flèche droite -->
+      <button class="carousel-arrow arrow-right" id="carousel-next">&#8250;</button>
+    </div>
+
+    <!-- Indicateurs de position -->
+    <div class="carousel-dots" id="carousel-dots"></div>
+
+    <!-- Bouton de sélection -->
+    <div style="text-align:center; margin-top: var(--sp-md);">
+      <button class="btn btn-primary btn-menu" id="btn-select-char"
+              style="max-width:280px; margin:0 auto; font-size:1.1rem; padding:16px 40px;">
+        ✊ CHOISIR CE COMBATTANT
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SCREEN 4 — MEILLEURS SCORES
+══════════════════════════════════════════════════ -->
+<div id="screen-scores" class="screen">
+  <div class="particles" id="particles-scores"></div>
+  <button class="btn-back" id="back-scores">← Retour</button>
+
+  <div class="scores-container glass-card">
+    <h2 class="screen-title glow-gold">🏆 MEILLEURS SCORES</h2>
+    <div class="scores-list" id="scores-list"></div>
+    <button class="btn btn-ghost" id="btn-clear"
+            style="width:100%;margin-top:var(--sp-sm);">
+      🗑️ Effacer les scores
+    </button>
+  </div>
+</div>
+
+<script src="js/avatar.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

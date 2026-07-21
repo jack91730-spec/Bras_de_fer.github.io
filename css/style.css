@@ -1,0 +1,278 @@
+﻿/* ============================================================
+   BRAS DE FER — Design System Global — Style Manga / Animé
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;900&display=swap');
+
+/* ===== RESET ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  /* Backgrounds */
+  --bg-deep:  #0a0a0a;
+  --bg-dark:  #111111;
+  --bg-mid:   #1a1a1a;
+  --bg-card:  #1e1e1e;
+
+  /* Panel (manga style — opaque) */
+  --glass:         #1e1e1e;
+  --glass-strong:  #252525;
+  --glass-border:  #333333;
+  --glass-hover:   #2a2a2a;
+
+  /* Player 1 — Rouge Manga */
+  --p1:       #e60000;
+  --p1-light: #ff4444;
+  --p1-dark:  #aa0000;
+  --p1-glow:  rgba(230,0,0,0.55);
+
+  /* Player 2 / AI — Bleu Néon */
+  --p2:       #0055ff;
+  --p2-light: #4488ff;
+  --p2-dark:  #003acc;
+  --p2-glow:  rgba(0,85,255,0.55);
+
+  /* AI accent — Vert Électrique */
+  --ai:       #00ff88;
+  --ai-light: #55ffaa;
+  --ai-dark:  #00cc66;
+  --ai-glow:  rgba(0,255,136,0.45);
+
+  /* Gold manga */
+  --gold:      #ffdd00;
+  --gold-glow: rgba(255,221,0,0.6);
+
+  /* Text */
+  --text:        #ffffff;
+  --text-sec:    rgba(255,255,255,0.80);
+  --text-muted:  rgba(255,255,255,0.45);
+
+  /* Typography */
+  --ff-display: 'Bangers', cursive;
+  --ff-body:    'Nunito', sans-serif;
+
+  /* Spacing */
+  --sp-xs:  6px;
+  --sp-sm:  12px;
+  --sp-md:  20px;
+  --sp-lg:  32px;
+  --sp-xl:  56px;
+
+  /* Radius — manga anguleux */
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   12px;
+  --r-xl:   16px;
+  --r-full: 9999px;
+
+  /* Transitions */
+  --t-fast: 0.10s ease;
+  --t-med:  0.22s ease;
+  --t-slow: 0.45s cubic-bezier(0.4,0,0.2,1);
+
+  /* Manga border */
+  --manga-border: 3px solid #000;
+  --manga-shadow: 4px 4px 0px #000;
+}
+
+/* ===== BASE ===== */
+html, body {
+  width: 100%; height: 100%; min-height: 100%;
+  overflow-x: hidden;
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: var(--ff-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== SCREEN SYSTEM ===== */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-slow);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--sp-lg) var(--sp-md);
+}
+.screen.active { opacity: 1; pointer-events: all; }
+
+@media (min-height: 600px) {
+  .screen { align-items: center; }
+}
+
+/* ===== BACKGROUND — Manga Grid ===== */
+.screen::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.012) 2px,
+      rgba(255,255,255,0.012) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.015) 60px,
+      rgba(255,255,255,0.015) 61px
+    ),
+    radial-gradient(ellipse 70% 70% at 15% 50%, rgba(230,0,0,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 70% at 85% 50%, rgba(0,85,255,0.10) 0%, transparent 65%),
+    linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== PARTICLES — Étoiles manga ===== */
+.particles {
+  position: absolute; inset: 0;
+  z-index: 1; overflow: hidden;
+  pointer-events: none;
+}
+.particle {
+  position: absolute;
+  background: #fff;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  animation: particle-rise linear infinite;
+}
+@keyframes particle-rise {
+  0%   { transform: translateY(108vh) scale(0.2) rotate(0deg); opacity: 0; }
+  8%   { opacity: 0.9; }
+  92%  { opacity: 0.5; }
+  100% { transform: translateY(-8vh) scale(1) rotate(360deg); opacity: 0; }
+}
+
+/* ===== MANGA CARD ===== */
+.glass-card {
+  background: var(--bg-card);
+  border: var(--manga-border);
+  box-shadow: var(--manga-shadow);
+  border-radius: var(--r-md);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-xs);
+  padding: 14px 32px;
+  border: 3px solid #000;
+  border-radius: var(--r-sm);
+  font-family: var(--ff-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px #000;
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.btn:hover {
+  box-shadow: 2px 2px 0px #000;
+  transform: translate(2px, 2px);
+}
+.btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px #000;
+}
+
+.btn-primary {
+  background: linear-gradient(160deg, #ff2200 0%, #ff6600 100%);
+  color: #fff;
+  text-shadow: 2px 2px 0 #000;
+}
+.btn-primary:hover { filter: brightness(1.12); }
+
+.btn-secondary {
+  background: linear-gradient(160deg, #0044ff 0%, #00aaff 100%);
+  color: #fff;
+  text-shadow: 2px 2px 0 #000;
+}
+.btn-secondary:hover { filter: brightness(1.12); }
+
+.btn-ghost {
+  background: var(--bg-mid);
+  color: var(--text-sec);
+  border: 3px solid var(--glass-border);
+  box-shadow: 3px 3px 0px #000;
+}
+.btn-ghost:hover {
+  background: var(--glass-hover);
+  color: var(--text);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 2px; }
+
+/* ===== TYPOGRAPHY UTILITIES ===== */
+.glow-gold {
+  color: var(--gold);
+  text-shadow: 3px 3px 0 #000, 0 0 20px var(--gold), 0 0 50px rgba(255,221,0,0.4);
+}
+.glow-red {
+  color: var(--p1-light);
+  text-shadow: 3px 3px 0 #000, 0 0 20px var(--p1);
+}
+.glow-blue {
+  color: var(--p2-light);
+  text-shadow: 3px 3px 0 #000, 0 0 20px var(--p2);
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes bounce-in {
+  0%   { transform: scale(0.4) translateY(20px); opacity: 0; }
+  65%  { transform: scale(1.10) translateY(-6px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+@keyframes slide-up {
+  from { transform: translateY(32px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes slide-down {
+  from { transform: translateY(-32px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+@keyframes shake {
+  0%,100% { transform: translateX(0) rotate(0); }
+  15%     { transform: translateX(-8px) rotate(-2deg); }
+  30%     { transform: translateX(8px) rotate(2deg); }
+  50%     { transform: translateX(-5px) rotate(-1deg); }
+  70%     { transform: translateX(5px) rotate(1deg); }
+}
+@keyframes pulse-scale {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.10); }
+}
+@keyframes flicker {
+  0%,100% { opacity: 1; }
+  40%     { opacity: 0.45; }
+  50%     { opacity: 1; }
+  55%     { opacity: 0.60; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fade-in-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes ripple-out {
+  to { transform: translate(-50%,-50%) scale(4); opacity: 0; }
+}
+@keyframes confetti-fall {
+  0%   { transform: translateY(-30px) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(540deg) scale(0.5); opacity: 0; }
+}
